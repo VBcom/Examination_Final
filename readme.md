@@ -38,7 +38,7 @@ sudo dpkg -i containerd.io_1.5.10-1_amd64.deb
 sudo dpkg -r containerd.io
 ```
 ## 6
-![Задание 6](https://raw.githubusercontent.com/VBcom/Examination_Final/main/6.png)
+![Задание 6](https://raw.githubusercontent.com/VBcom/Examination_Final/main/src/6.png)
 
 ## 7
 ```mysql
