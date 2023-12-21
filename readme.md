@@ -1,13 +1,13 @@
 # Задания
 ## 1
-![Задание 1](https://raw.githubusercontent.com/VBcom/Examination_Final/main/1.png)
+![Задание 1](https://raw.githubusercontent.com/VBcom/Examination_Final/main/src/1.png)
 ## 2
-![Задание 2](https://raw.githubusercontent.com/VBcom/Examination_Final/main/2.png)
+![Задание 2](https://raw.githubusercontent.com/VBcom/Examination_Final/main/src/2.png)
 ## 3
-![Задание 3](https://raw.githubusercontent.com/VBcom/Examination_Final/main/3_1.png)
-![Задание 3](https://raw.githubusercontent.com/VBcom/Examination_Final/main/3_2.png)
+![Задание 3](https://raw.githubusercontent.com/VBcom/Examination_Final/main/src/3_1.png)
+![Задание 3](https://raw.githubusercontent.com/VBcom/Examination_Final/main/src/3_2.png)
 ## 4
-![Задание 4](https://raw.githubusercontent.com/VBcom/Examination_Final/main/4.png)
+![Задание 4](https://raw.githubusercontent.com/VBcom/Examination_Final/main/src/4.png)
 ## 5
 ### 1
 ```
