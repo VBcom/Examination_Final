@@ -91,7 +91,9 @@ CREATE TABLE dogs
     Foreign KEY (Genus_id) REFERENCES animals_home (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO dogs (Name, Birthday, Commands, Genus_id)
-VALUES ('Имя 1', '2023-01-01', 'Команда 1', 1), ('Имя 2', '2023-01-01', "Команда 2", 1), ('Имя 3', '2023-01-01', "Команда 3", 1);
+VALUES ('Имя 1', '2023-01-01', 'Команда 1', 1),
+('Имя 2', '2023-01-01', "Команда 2", 1),
+('Имя 3', '2023-01-01', "Команда 3", 1);
 
 CREATE TABLE cats 
 (       
@@ -103,7 +105,9 @@ CREATE TABLE cats
     Foreign KEY (Genus_id) REFERENCES animals_home (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO cats (Name, Birthday, Commands, Genus_id)
-VALUES ('Кошка 1', '2023-01-01', 'Команда 1', 2), ('Кошка 2', '2023-01-01', "Команда 2", 2), ('Кошка 3', '2023-01-01', "Команда 3", 2);
+VALUES ('Кошка 1', '2023-01-01', 'Команда 1', 2),
+('Кошка 2', '2023-01-01', "Команда 2", 2),
+('Кошка 3', '2023-01-01', "Команда 3", 2);
 
 CREATE TABLE hamsters 
 (       
@@ -115,7 +119,9 @@ CREATE TABLE hamsters
     Foreign KEY (Genus_id) REFERENCES animals_home (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO hamsters (Name, Birthday, Commands, Genus_id)
-VALUES ('Хомяк 1', '2023-01-01', 'Команда 1', 3), ('Хомяк 2', '2023-01-01', "Команда 2", 3), ('Хомяк 3', '2023-01-01', "Команда 3", 3);
+VALUES ('Хомяк 1', '2023-01-01', 'Команда 1', 3),
+('Хомяк 2', '2023-01-01', "Команда 2", 3),
+('Хомяк 3', '2023-01-01', "Команда 3", 3);
 
 CREATE TABLE horses
 (       
@@ -127,7 +133,9 @@ CREATE TABLE horses
     Foreign KEY (Genus_id) REFERENCES animals_pack (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO horses (Name, Birthday, Commands, Genus_id)
-VALUES ('Лошадь  1', '2023-01-01', 'Команда 1', 1), ('Лошадь 2', '2023-01-01', "Команда 2", 1), ('Лошадь 3', '2023-01-01', "Команда 3", 1);
+VALUES ('Лошадь  1', '2023-01-01', 'Команда 1', 1),
+('Лошадь 2', '2023-01-01', "Команда 2", 1),
+('Лошадь 3', '2023-01-01', "Команда 3", 1);
 
 CREATE TABLE donkeys 
 (       
@@ -139,7 +147,9 @@ CREATE TABLE donkeys
     Foreign KEY (Genus_id) REFERENCES animals_pack (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO donkeys (Name, Birthday, Commands, Genus_id)
-VALUES ('Осел 1', '2023-01-01', 'Команда 1', 2), ('Осел 2', '2023-01-01', 'Команда 2', 2), ('Осел  3', '2023-01-01', 'Команда 3', 2);
+VALUES ('Осел 1', '2023-01-01', 'Команда 1', 2),
+('Осел 2', '2023-01-01', 'Команда 2', 2),
+('Осел  3', '2023-01-01', 'Команда 3', 2);
 
 CREATE TABLE camels 
 (       
@@ -151,5 +161,7 @@ CREATE TABLE camels
     Foreign KEY (Genus_id) REFERENCES animals_pack (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO camels (Name, Birthday, Commands, Genus_id)
-VALUES ('Верблюд 1', '2023-01-01', 'Команда 1', 3), ('Верблюд 2', '2023-01-01', "Команда 2", 3), ('Верблюд 3', '2023-01-01', "Команда 3", 3);
+VALUES ('Верблюд 1', '2023-01-01', 'Команда 1', 3),
+('Верблюд 2', '2023-01-01', "Команда 2", 3),
+('Верблюд 3', '2023-01-01', "Команда 3", 3);
 ```
