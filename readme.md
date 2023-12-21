@@ -49,8 +49,8 @@ CREATE DATABASE friends_of_human;
 USE friends_of_human;
 CREATE TABLE animal_classes
 (
-	Id INT AUTO_INCREMENT PRIMARY KEY, 
-	Class_name VARCHAR(20)
+    Id INT AUTO_INCREMENT PRIMARY KEY, 
+    Class_name VARCHAR(20)
 );
 
 INSERT INTO animal_classes (Class_name)
@@ -58,7 +58,7 @@ VALUES ('домашние'), ('вьючные');
 
 CREATE TABLE animals_home
 (
-	  Id INT AUTO_INCREMENT PRIMARY KEY,
+    Id INT AUTO_INCREMENT PRIMARY KEY,
     Genus_name VARCHAR (20),
     Class_id INT,
     FOREIGN KEY (Class_id) REFERENCES animal_classes (Id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -69,7 +69,7 @@ VALUES ('Собаки', 1), ('Кошки', 1), ('Хомяки', 1);
 
 CREATE TABLE animals_pack
 (
-	  Id INT AUTO_INCREMENT PRIMARY KEY,
+    Id INT AUTO_INCREMENT PRIMARY KEY,
     Genus_name VARCHAR (20),
     Class_id INT,
     FOREIGN KEY (Class_id) REFERENCES animal_classes (Id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -91,9 +91,9 @@ CREATE TABLE dogs
     Foreign KEY (Genus_id) REFERENCES animals_home (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO dogs (Name, Birthday, Commands, Genus_id)
-VALUES ('Имя 1', '2023-01-01', 'Команда 1', 1),
-('Имя 2', '2023-01-01', "Команда 2", 1),
-('Имя 3', '2023-01-01', "Команда 3", 1);
+VALUES ('Собака 1', '2023-01-01', 'Команда 1', 1),
+('Собака 2', '2023-01-01', "Команда 2", 1),
+('Собака 3', '2023-01-01', "Команда 3", 1);
 
 CREATE TABLE cats 
 (       
@@ -133,23 +133,9 @@ CREATE TABLE horses
     Foreign KEY (Genus_id) REFERENCES animals_pack (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO horses (Name, Birthday, Commands, Genus_id)
-VALUES ('Лошадь  1', '2023-01-01', 'Команда 1', 1),
+VALUES ('Лошадь 1', '2023-01-01', 'Команда 1', 1),
 ('Лошадь 2', '2023-01-01', "Команда 2", 1),
 ('Лошадь 3', '2023-01-01', "Команда 3", 1);
-
-CREATE TABLE donkeys 
-(       
-    Id INT AUTO_INCREMENT PRIMARY KEY, 
-    Name VARCHAR(20), 
-    Birthday DATE,
-    Commands VARCHAR(50),
-    Genus_id int,
-    Foreign KEY (Genus_id) REFERENCES animals_pack (Id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-INSERT INTO donkeys (Name, Birthday, Commands, Genus_id)
-VALUES ('Осел 1', '2023-01-01', 'Команда 1', 2),
-('Осел 2', '2023-01-01', 'Команда 2', 2),
-('Осел  3', '2023-01-01', 'Команда 3', 2);
 
 CREATE TABLE camels 
 (       
@@ -164,4 +150,68 @@ INSERT INTO camels (Name, Birthday, Commands, Genus_id)
 VALUES ('Верблюд 1', '2023-01-01', 'Команда 1', 3),
 ('Верблюд 2', '2023-01-01', "Команда 2", 3),
 ('Верблюд 3', '2023-01-01', "Команда 3", 3);
+
+CREATE TABLE donkeys 
+(       
+    Id INT AUTO_INCREMENT PRIMARY KEY, 
+    Name VARCHAR(20), 
+    Birthday DATE,
+    Commands VARCHAR(50),
+    Genus_id int,
+    Foreign KEY (Genus_id) REFERENCES animals_pack (Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO donkeys (Name, Birthday, Commands, Genus_id)
+VALUES ('Осел 1', '2023-01-01', 'Команда 1', 2),
+('Осел 2', '2023-01-01', 'Команда 2', 2),
+('Осел 3', '2023-01-01', 'Команда 3', 2);
+```
+## 10
+```mysql
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM camels;
+
+SELECT Name, Birthday, Commands FROM horses
+UNION SELECT  Name, Birthday, Commands FROM donkeys;
+```
+## 11
+```mysql
+CREATE TEMPORARY TABLE animals AS 
+SELECT *, 'Лошади' as genus FROM horses
+UNION SELECT *, 'Ослы' AS genus FROM donkeys
+UNION SELECT *, 'Собаки' AS genus FROM dogs
+UNION SELECT *, 'Кошки' AS genus FROM cats
+UNION SELECT *, 'Хомяки' AS genus FROM hamsters;
+
+CREATE TABLE animals_young AS
+SELECT Name, Birthday, Commands, genus, TIMESTAMPDIFF(MONTH, Birthday, CURDATE()) AS Age_in_month
+FROM animals WHERE Birthday BETWEEN ADDDATE(curdate(), INTERVAL -3 YEAR) AND ADDDATE(CURDATE(), INTERVAL -1 YEAR);
+ 
+SELECT * FROM animals_young;
+```
+## 12
+```mysql
+SELECT h.Name, h.Birthday, h.Commands, pa.Genus_name, ya.Age_in_month 
+FROM horses h
+LEFT JOIN animals_young ya ON ya.Name = h.Name
+LEFT JOIN animals_pack pa ON pa.Id = h.Genus_id
+UNION 
+SELECT d.Name, d.Birthday, d.Commands, pa.Genus_name, ya.Age_in_month 
+FROM donkeys d 
+LEFT JOIN animals_young ya ON ya.Name = d.Name
+LEFT JOIN animals_pack pa ON pa.Id = d.Genus_id
+UNION
+SELECT c.Name, c.Birthday, c.Commands, ha.Genus_name, ya.Age_in_month 
+FROM cats c
+LEFT JOIN animals_young ya ON ya.Name = c.Name
+LEFT JOIN animals_home ha ON ha.Id = c.Genus_id
+UNION
+SELECT d.Name, d.Birthday, d.Commands, ha.Genus_name, ya.Age_in_month 
+FROM dogs d
+LEFT JOIN animals_young ya ON ya.Name = d.Name
+LEFT JOIN animals_home ha ON ha.Id = d.Genus_id
+UNION
+SELECT hm.Name, hm.Birthday, hm.Commands, ha.Genus_name, ya.Age_in_month 
+FROM hamsters hm
+LEFT JOIN animals_young ya ON ya.Name = hm.Name
+LEFT JOIN animals_home ha ON ha.Id = hm.Genus_id;
 ```
